@@ -1,0 +1,51 @@
+(
+    (call threading.Thread
+        (function(
+            (define send ()
+                (
+                    (call print "\1")
+	            (call send)
+                )
+            )
+            (call send)
+        ))
+    )
+
+    (call threading.Thread
+        (function(
+            (define receive ()
+                (
+		    (call print "\2")
+                    (call receive)
+                )
+            )
+            (call receive)
+        ))
+    )
+    
+    (call threading.Thread
+        (function(
+            (define receive ()
+                (
+		    (call print "\3")
+                    (call receive)
+                )
+            )
+            (call receive)
+        ))
+    )
+
+    (call threading.Thread
+        (function(
+            (define receive ()
+                (
+		    (call print "\4")
+                    (call receive)
+                )
+            )
+            (call receive)
+        ))
+    )
+    
+    (call while (function((return 1))))
+)

@@ -1,0 +1,176 @@
+(
+    ; (define l (call lists.List))
+    ; (define l (call lists.Append l "Adam"))
+    ; (define l (call lists.Append l "Sarah"))
+    ; (define l (call lists.Append l "Thombo"))
+    ; (define l (call lists.Append l "Addison"))
+    ; (define n (call lists.Length l))
+    ; (call lists.Items l)
+    ; (call print)
+    ; (call print)
+    ; (call print)
+    ; (call print)
+    ; (call print endl)
+    ; (define l (call lists.Pop l))
+    ; (define l (call lists.Append l "Kip"))
+    ; (call lists.Items l)
+    ; (call print)
+    ; (call print)
+    ; (call print)
+    ; (call print)
+    ; (call print endl)
+
+    
+    ; (define List ()
+    ;     (
+    ;         (define self @)
+    ;         (define self list (call lists.List))
+    ;         (define append
+    ;             (self a)
+    ;             (
+    ;                 (define self list (call lists.Append (dot self list) a))
+    ;                 (return self)
+    ;             )
+    ;         )
+    ;         (define self append append)
+    ;         (define pop
+    ;             (self)
+    ;             (
+    ;                 (define self list (call lists.Pop (dot self list)))
+    ;                 (return self)
+    ;             )
+    ;         )
+    ;         (define self pop pop)
+    ;         (define len
+    ;             (self)
+    ;             (
+    ;                 (call lists.Length (dot self list))
+    ;             )
+    ;         )
+    ;         (define self len len)
+    ;         (define items
+    ;             (self)
+    ;             (
+    ;                 (call lists.Items (dot self list))
+    ;             )
+    ;         )
+    ;         (define self items items)
+    ;         (define index
+    ;             (self n)
+    ;             (
+    ;                 (call lists.Index (dot self list) n)
+    ;             )
+    ;         )
+    ;         (define self index index)
+    ;         (return self)
+    ;     )
+    ; )
+
+
+    ; (define l (call (dot l append) l "Adam"))
+    ; (call for "x" l
+    ;     (function (
+    ;         (call print x)
+    ;         (define l (call (dot l append) l x))
+    ;     ))
+    ; )
+    ; (define foreach (v al f)
+    ;     (
+    ;         (call for v (call range 0 (call sub (call (dot al len) al) 1))
+    ;             f
+    ;         )
+    ;     )
+    ; )
+
+    ; (define append (L e)
+    ;     (
+    ;         (define L (call (dot L append) L e))
+    ;         (return L)
+    ;     )
+    ; )
+
+    ; (define main ()
+    ;     (
+    ;         (define l (call list))
+    ;         (define loop ()
+    ;             (
+    ;                 (define l (call append l "a"))
+    ;                 (define l (call append l "b"))
+    ;                 (call foreach "x" l
+    ;                     (function(
+    ;                         (call println (call (dot l index) l x))
+    ;                     ))
+    ;                 )
+    ;                 (call foreach "x" l
+    ;                     (function(
+    ;                         (call println (call (dot l index) l x))
+    ;                     ))
+    ;                 )
+    ;             )
+    ;         )
+    ;         (call loop)
+    ;     )
+    ; )
+    ; (call main)
+    ; (call for "x" l
+    ;     (function (
+    ;         (call print x)
+    ;     ))
+    ; )
+    ; (define a "asdf")
+    ; (define b a)
+    ; (call println b)
+    
+    (define in (l elem)
+        (
+            (define r 0)
+            (call for "x" l
+                (function(
+                    ; (call print "Testing: addr = ")
+                    ; (call println x)
+
+                    (call if (call equal x elem)
+                        (function(
+                            ; (call println "Found element!")
+                            (define r 1)
+                        ))
+                    )
+                ))
+            )
+            (return r)
+        )
+    )
+
+    (define append (list_append e)
+        (
+            (define list_append (call (dot list_append append) list_append e))
+            (return list_append)
+        )
+    )
+
+    (define pop (list_pop)
+        (
+            (define list_pop (call (dot list_pop append) list_pop))
+            (return list_pop)
+        )
+    )
+
+    (define len (list_len)
+        (
+            (define r (call (dot list_len len) list_len))
+            (return r)
+        )
+    )
+
+    (define for (v list_arg f)
+        (
+            (call println f)
+            (call for_reserved v (call range 0 (call sub (call (dot list_arg len) list_arg) 1))
+                (function(
+                    (call pointer_write v (call (dot list_arg index) list_arg (call pointer_read v)))
+                    (call f)
+                ))
+            )
+        )
+    )
+)

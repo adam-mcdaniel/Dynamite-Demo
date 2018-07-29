@@ -1,0 +1,39 @@
+(
+    (define main ()
+        (
+            (call udp.Listen "\8080")
+            (call print "Server started.")
+            (call print endl)
+            (define clients (call list))
+            (define loop ()
+                (
+                    (call udp.ServerReceive)
+                    (call unpack "text")
+                    (call unpack "addr")
+                    ; (call println (call in clients addr))
+                    ; (call println addr)
+                    (call if (call not (call in clients addr))
+                        (function(
+                            (define clients (call append clients addr))
+                            (call println (call len clients))
+                        ))
+                    )
+                    
+                    (call for "c" clients
+                        (function(
+                            (call if (call notequal c addr)
+                                (function(
+                                    (call udp.ServerSend text c)
+                                ))
+                            )
+                        ))
+                    )
+                    ; (call print (call list))
+                    (call loop)
+                )
+            )
+            (call loop)
+        )
+    )
+    (call main)
+)

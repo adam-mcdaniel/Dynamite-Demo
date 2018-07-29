@@ -1,0 +1,37 @@
+(
+    (call threading.Thread
+        (function(
+            (define send ()
+                (
+                    (define s (call input))
+                    (call print "Sending: ")
+                    (call println s)
+                    (call threading.PushToChannel s)
+                    (call send)
+                )
+            )
+            (call send)
+        ))
+    )
+
+    (call threading.Thread
+        (function(
+            (define receive ()
+                (
+                    ; (call threading.PushToChannel "Whoa, one thread?!?!")
+                    (call if (call notequal (call threading.GetBottomChannel) 0)
+                        (function(
+                            (call print "Receiving: ")
+                            (call println (call threading.GetBottomChannel))
+                            (call threading.DeleteFromChannel)
+                        ))
+                    )
+                    (call receive)
+                )
+            )
+            (call receive)
+        ))
+    )
+    
+    (call while (function((return 1))))
+)

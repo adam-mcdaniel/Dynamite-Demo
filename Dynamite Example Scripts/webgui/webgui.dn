@@ -1,0 +1,7 @@
+(
+    (define html (call io.ReadFile "webpage.html"))
+    (define title "Happy Father's Day")
+    (define width 1000)
+    (define height 800)
+    (call webgui.MakeWindow html title width height)
+)

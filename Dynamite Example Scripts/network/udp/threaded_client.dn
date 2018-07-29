@@ -1,0 +1,33 @@
+(
+
+    
+    (call udp.Connect "127.0.0.1" "\8080")
+    (call println "Connected to server.")
+
+    (call threading.Thread
+        (function(
+            (define send ()
+                (
+                    (define s (call input))
+                    (call udp.ClientSend s)
+                    (call send)
+                )
+            )
+            (call send)
+        ))
+    )
+
+    (call threading.Thread
+        (function(
+            (define receive ()
+                (
+                    (call println (call udp.ClientReceive))
+                    (call receive)
+                )
+            )
+            (call receive)
+        ))
+    )
+    
+    (call while (function((return 1))))
+)

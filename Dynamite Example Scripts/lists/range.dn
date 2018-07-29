@@ -1,0 +1,9 @@
+(
+    (call for "x" (call range 1 3)
+        (function(
+            (call print "Random number between 1 and 10: ")
+            (call print (call rand.randint 1 10))
+            (call print endl)            
+        ))
+    )
+)
